@@ -1,3 +1,5 @@
 theme: jekyll-theme-cayman
 
 add plugins: - jekyll-sitemap
+
+run bundle exec jekyll serve
