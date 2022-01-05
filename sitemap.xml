@@ -1,0 +1,31 @@
+---
+layout: null
+---
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;urlset xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+xsi:schemaLocation=&quot;http://www.sitemaps.org/schemas/sitemap/0.9
+http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd&quot;
+xmlns=&quot;http://www.sitemaps.org/schemas/sitemap/0.9&quot;&gt;
+{% for post in site.posts %}
+&lt;url&gt;
+&lt;loc&gt;{{ site.url }}{{ post.url }}&lt;/loc&gt;
+{% if post.lastmod == null %}
+&lt;lastmod&gt;{{ post.date | date_to_xmlschema }}&lt;/lastmod&gt;
+{% else %}
+&lt;lastmod&gt;{{ post.lastmod | date_to_xmlschema }}&lt;/lastmod&gt;
+{% endif %}
+&lt;changefreq&gt;monthly&lt;/changefreq&gt;
+&lt;priority&gt;1.0&lt;/priority&gt;
+&lt;/url&gt;
+{% endfor %}
+{% for page in site.pages %}
+{% if page.sitemap != null and page.sitemap != empty %}
+&lt;url&gt;
+&lt;loc&gt;{{ site.url }}{{ page.url }}&lt;/loc&gt;
+&lt;lastmod&gt;{{ page.sitemap.lastmod | date_to_xmlschema }}&lt;/lastmod&gt;
+&lt;changefreq&gt;{{ page.sitemap.changefreq }}&lt;/changefreq&gt;
+&lt;priority&gt;{{ page.sitemap.priority }}&lt;/priority&gt;
+&lt;/url&gt;
+{% endif %}
+{% endfor %}
+&lt;/urlset&gt;
